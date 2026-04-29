@@ -7,7 +7,6 @@ import {
   MapPin, 
   DollarSign, 
   Percent,
-  Toggle,
   Phone,
   Mail,
   Globe
