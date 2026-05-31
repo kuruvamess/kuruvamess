@@ -25,18 +25,9 @@ export default function AdminMenuPage() {
   const categories = [
     'all',
     'breakfast',
-    'lunch-specials',
-    'dinner',
-    'biryani',
-    'traditional-sadhya',
-    'dosa-varieties',
-    'chapathi-porotta',
     'curry-items',
-    'river-fish',
-    'daily-specials',
-    'beverages',
-    'desserts',
-    'snacks'
+    'lunch',
+    'dinner'
   ];
 
   const filteredItems = items.filter(item => {

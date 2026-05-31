@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { Star, Clock, ShoppingCart, Plus } from 'lucide-react';
+import { Star, Clock, ShoppingCart, Phone } from 'lucide-react';
 import { MenuItem } from '@/types/menu';
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
+import { withBasePath } from '@/lib/imagePath';
+
+const ORDER_PHONE = '9846880933';
 
 interface MenuCardProps {
   item: MenuItem;
@@ -34,7 +37,7 @@ const MenuCard = ({ item }: MenuCardProps) => {
         {/* Image */}
         <div className="relative w-1/3 h-40">
           <Image
-            src={item.image}
+            src={withBasePath(item.image)}
             alt={item.name}
             fill
             className="object-cover"
@@ -60,14 +63,18 @@ const MenuCard = ({ item }: MenuCardProps) => {
           <p className="text-gray-600 text-sm mb-3 line-clamp-2">{item.description}</p>
 
           <div className="flex items-center gap-4 text-sm text-gray-500">
-            <span className="flex items-center">
-              <Star className="w-4 h-4 text-yellow-500 mr-1" />
-              {item.rating}
-            </span>
-            <span className="flex items-center">
-              <Clock className="w-4 h-4 mr-1" />
-              {item.preparationTime} min
-            </span>
+            {item.rating > 0 && (
+              <span className="flex items-center">
+                <Star className="w-4 h-4 text-yellow-500 mr-1" />
+                {item.rating}
+              </span>
+            )}
+            {item.preparationTime > 0 && (
+              <span className="flex items-center">
+                <Clock className="w-4 h-4 mr-1" />
+                {item.preparationTime} min
+              </span>
+            )}
             {item.spiceLevel && (
               <span title={`Spice Level: ${item.spiceLevel}`}>
                 {getSpiceLevelIcon(item.spiceLevel)}
@@ -81,7 +88,11 @@ const MenuCard = ({ item }: MenuCardProps) => {
       <div className="px-4 pb-4 pt-2 border-t border-gray-100 mt-auto">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-2xl font-bold text-primary">₹{item.price}</p>
+            {item.price > 0 ? (
+              <p className="text-2xl font-bold text-primary">₹{item.price}</p>
+            ) : (
+              <p className="text-base font-semibold text-primary">Price on request</p>
+            )}
             {item.tags.length > 0 && (
               <div className="flex gap-1 mt-1">
                 {item.tags.slice(0, 2).map((tag, index) => (
@@ -93,7 +104,9 @@ const MenuCard = ({ item }: MenuCardProps) => {
             )}
           </div>
 
-          {item.isAvailable ? (
+          {!item.isAvailable ? (
+            <span className="text-red-600 font-medium">Not Available</span>
+          ) : item.price > 0 ? (
             <div className="flex items-center gap-2">
               <div className="flex items-center border border-gray-300 rounded-lg">
                 <button
@@ -120,7 +133,14 @@ const MenuCard = ({ item }: MenuCardProps) => {
               </button>
             </div>
           ) : (
-            <span className="text-red-600 font-medium">Not Available</span>
+            <a
+              href={`tel:${ORDER_PHONE}`}
+              className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm"
+              title="Call to order"
+            >
+              <Phone className="w-4 h-4" />
+              Call to Order
+            </a>
           )}
         </div>
       </div>

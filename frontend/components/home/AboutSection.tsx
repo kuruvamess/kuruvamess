@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Utensils, Users, Award, MapPin } from 'lucide-react';
+import { withBasePath } from '@/lib/imagePath';
 
 const AboutSection = () => {
   const features = [
@@ -88,7 +89,7 @@ const AboutSection = () => {
               <div className="space-y-4">
                 <div className="relative h-48 rounded-lg overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop"
+                    src={withBasePath('/menu/sadya.jpeg')}
                     alt="Kerala Sadya"
                     fill
                     className="object-cover hover:scale-110 transition-transform duration-300"
@@ -96,8 +97,8 @@ const AboutSection = () => {
                 </div>
                 <div className="relative h-64 rounded-lg overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=400&h=400&fit=crop"
-                    alt="Traditional Kerala Kitchen"
+                    src={withBasePath('/menu/meals.jpeg')}
+                    alt="Kerala Meals"
                     fill
                     className="object-cover hover:scale-110 transition-transform duration-300"
                   />
@@ -106,15 +107,15 @@ const AboutSection = () => {
               <div className="space-y-4 pt-8">
                 <div className="relative h-64 rounded-lg overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1633350117612-88789e89a263?w=400&h=400&fit=crop"
-                    alt="Kerala Fish Curry"
+                    src={withBasePath('/menu/chicken-curry.jpeg')}
+                    alt="Kerala Chicken Curry"
                     fill
                     className="object-cover hover:scale-110 transition-transform duration-300"
                   />
                 </div>
                 <div className="relative h-48 rounded-lg overflow-hidden">
                   <Image
-                    src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=300&fit=crop"
+                    src={withBasePath('/menu/biriyani.jpeg')}
                     alt="Kerala Biryani"
                     fill
                     className="object-cover hover:scale-110 transition-transform duration-300"

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, Clock, Flame } from 'lucide-react';
+import { withBasePath } from '@/lib/imagePath';
 
 const FeaturedDishes = () => {
   const dishes = [
@@ -11,10 +11,7 @@ const FeaturedDishes = () => {
       id: 1,
       name: 'Special Biryani',
       description: 'Our signature dish - aromatic basmati rice layered with tender meat, infused with authentic Kerala spices',
-      price: '₹180',
-      image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&h=400&fit=crop',
-      rating: 4.8,
-      prepTime: '45 min',
+      image: '/menu/biriyani.jpeg',
       spiceLevel: 'medium',
       isVeg: false,
       tag: 'Signature Dish'
@@ -23,10 +20,7 @@ const FeaturedDishes = () => {
       id: 2,
       name: 'Nadan Sadhya',
       description: 'Traditional Kerala feast served on banana leaf with an array of vegetarian delicacies',
-      price: '₹250',
-      image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?w=600&h=400&fit=crop',
-      rating: 4.9,
-      prepTime: '30 min',
+      image: '/menu/sadya.jpeg',
       spiceLevel: 'mild',
       isVeg: true,
       tag: 'Traditional'
@@ -35,49 +29,37 @@ const FeaturedDishes = () => {
       id: 3,
       name: 'River Fish Fry',
       description: 'Fresh catch from local rivers, marinated in traditional spices and fried to perfection',
-      price: '₹220',
-      image: 'https://images.unsplash.com/photo-1626200419320-77448f03151d?w=600&h=400&fit=crop',
-      rating: 4.7,
-      prepTime: '25 min',
+      image: '/menu/river-fish-fry.jpeg',
       spiceLevel: 'hot',
       isVeg: false,
       tag: 'Daily Special'
     },
     {
       id: 4,
-      name: 'Kerala Porotta & Beef Curry',
-      description: 'Flaky, layered porotta served with spicy and flavorful beef curry',
-      price: '₹150',
-      image: 'https://images.unsplash.com/photo-1670163090584-e43596b4471f?w=600&h=400&fit=crop',
-      rating: 4.6,
-      prepTime: '35 min',
+      name: 'Porotta & Chicken Curry',
+      description: 'Flaky, layered Malabar porotta served with our spicy, flavorful Kerala chicken curry',
+      image: '/menu/porotta-lunch.jpeg',
       spiceLevel: 'hot',
       isVeg: false,
       tag: 'Popular'
     },
     {
       id: 5,
-      name: 'Masala Dosa',
-      description: 'Crispy rice crepe filled with spiced potato filling, served with sambar and chutneys',
-      price: '₹80',
-      image: 'https://images.unsplash.com/photo-1630383249904-fc01cc4d1dc4?w=600&h=400&fit=crop',
-      rating: 4.5,
-      prepTime: '20 min',
-      spiceLevel: 'mild',
-      isVeg: true,
-      tag: 'Breakfast Special'
+      name: 'Chicken Fry',
+      description: 'Crispy deep-fried bone-in chicken coated in roasted Kerala spice masala with fried curry leaves',
+      image: '/menu/chicken-fry.jpeg',
+      spiceLevel: 'medium',
+      isVeg: false,
+      tag: 'Local Favorite'
     },
     {
       id: 6,
       name: 'Fish Curry Meals',
       description: 'Traditional Kerala fish curry served with rice, vegetables, and accompaniments',
-      price: '₹120',
-      image: 'https://images.unsplash.com/photo-1596128160992-bd90fb59f190?w=600&h=400&fit=crop',
-      rating: 4.7,
-      prepTime: '30 min',
+      image: '/menu/fish-curry-meals.jpeg',
       spiceLevel: 'medium',
       isVeg: false,
-      tag: 'Local Favorite'
+      tag: 'Meal'
     }
   ];
 
@@ -125,7 +107,7 @@ const FeaturedDishes = () => {
                 {/* Image Container */}
                 <div className="relative h-64 overflow-hidden">
                   <Image
-                    src={dish.image}
+                    src={withBasePath(dish.image)}
                     alt={dish.name}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
@@ -141,29 +123,16 @@ const FeaturedDishes = () => {
                       </span>
                     )}
                   </div>
-                  {/* Price Badge */}
-                  <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg">
-                    <p className="text-2xl font-bold text-primary">{dish.price}</p>
-                  </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">{dish.name}</h3>
                   <p className="text-gray-600 mb-4 line-clamp-2">{dish.description}</p>
-                  
+
                   {/* Meta Info */}
                   <div className="flex items-center justify-between text-sm text-gray-500">
-                    <div className="flex items-center gap-4">
-                      <span className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                        {dish.rating}
-                      </span>
-                      <span className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {dish.prepTime}
-                      </span>
-                    </div>
+                    <span className="text-base font-semibold text-primary">Price on request</span>
                     <span title={`Spice Level: ${dish.spiceLevel}`}>
                       {getSpiceLevelIcon(dish.spiceLevel)}
                     </span>
